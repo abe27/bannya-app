@@ -1,0 +1,5 @@
+# *
+!**/.gitkeep
+!**/*.json
+!avatars/*.png
+!.gitignore

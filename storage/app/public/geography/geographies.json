@@ -1,0 +1,38 @@
+[
+    {
+        "code": 1,
+        "name": "ภาคเหนือ",
+        "description": "",
+        "is_active": true
+    },
+    {
+        "code": 2,
+        "name": "ภาคกลาง",
+        "description": "",
+        "is_active": true
+    },
+    {
+        "code": 3,
+        "name": "ภาคตะวันออกเฉียงเหนือ",
+        "description": "",
+        "is_active": true
+    },
+    {
+        "code": 4,
+        "name": "ภาคตะวันตก",
+        "description": "",
+        "is_active": true
+    },
+    {
+        "code": 5,
+        "name": "ภาคตะวันออก",
+        "description": "",
+        "is_active": true
+    },
+    {
+        "code": 6,
+        "name": "ภาคใต้",
+        "description": "",
+        "is_active": true
+    }
+]

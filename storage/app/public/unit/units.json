@@ -1,0 +1,20 @@
+[
+    {
+        "id": "1",
+        "company_id": "1",
+        "branch_id": "1",
+        "name": "ชิ้น",
+        "description": "",
+        "logo": "",
+        "is_active": true
+    },
+    {
+        "id": "2",
+        "company_id": "1",
+        "branch_id": "1",
+        "name": "กล่อง",
+        "description": "",
+        "logo": "",
+        "is_active": true
+    }
+]
