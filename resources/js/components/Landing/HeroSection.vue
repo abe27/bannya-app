@@ -1,30 +1,53 @@
 <template>
-  <div class="relative bg-gradient-to-r from-green-50 to-green-100 overflow-hidden py-16 lg:py-24">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center justify-between">
-      <div class="lg:w-1/2 text-center lg:text-left mb-10 lg:mb-0">
-        <h1 class="text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl md:text-7xl leading-tight">
-          <span class="block xl:inline">ศูนย์รวมขายส่ง</span>
-          <span class="block text-green-700 xl:inline">ยาภูมิแพ้คุณภาพสูง</span>
-        </h1>
-        <p class="mt-4 text-xl text-gray-600 sm:mt-6 sm:text-2xl max-w-xl mx-auto lg:mx-0">
-          ดูแลแบบมืออาชีพ ในราคาเอื้ออาทร พร้อมให้คำปรึกษาโดยผู้เชี่ยวชาญด้านยาภูมิแพ้
-        </p>
-        <div class="mt-8 flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-          <a href="/register" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-transparent text-lg font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-xl md:px-10 transition duration-300 ease-in-out shadow-lg">
-            เริ่มต้นใช้งาน
-          </a>
-          <a href="#" class="w-full sm:w-auto flex items-center justify-center px-8 py-3 border border-green-600 text-lg font-medium rounded-md text-green-700 bg-white hover:bg-green-50 md:py-4 md:text-xl md:px-10 transition duration-300 ease-in-out shadow-lg">
-            ดูสินค้า
-          </a>
-        </div>
+  <div class="relative bg-white overflow-hidden min-h-screen flex items-center">
+    <div class="max-w-7xl mx-auto w-full">
+      <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32 lg:min-h-screen lg:flex lg:flex-col lg:justify-center">
+        <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2" fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+          <polygon points="50,0 100,0 50,100 0,100" />
+        </svg>
+
+        <div class="relative pt-6 px-4 sm:px-6 lg:px-8"></div>
+
+        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+          <div class="sm:text-center lg:text-left">
+            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+              <span class="block xl:inline">{{ heroData.titlePart1 }}</span>
+              <span class="block text-green-600 xl:inline">{{ heroData.titlePart2 }}</span>
+            </h1>
+            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              {{ heroData.description }}
+            </p>
+            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+              <div class="rounded-md shadow">
+                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10">
+                  {{ heroData.button1Text }}
+                </a>
+              </div>
+              <div class="mt-3 sm:mt-0 sm:ml-3">
+                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 md:py-4 md:text-lg md:px-10">
+                  {{ heroData.button2Text }}
+                </a>
+              </div>
+            </div>
+          </div>
+        </main>
       </div>
-      <div class="lg:w-1/2 flex justify-center lg:justify-end">
-        <img class="rounded-lg shadow-xl transform hover:scale-105 transition duration-500 ease-in-out" src="/images/landing/hero-image.jpg" alt="Hero Image">
-      </div>
+    </div>
+    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 lg:min-h-screen">
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" :src="heroData.image" :alt="heroData.titlePart1">
     </div>
   </div>
 </template>
 
-<script setup>
-// No script needed for this component
+<script setup lang="ts">
+interface HeroData {
+  titlePart1: string;
+  titlePart2: string;
+  description: string;
+  button1Text: string;
+  button2Text: string;
+  image: string;
+}
+
+const props = defineProps<{ heroData: HeroData }>();
 </script>

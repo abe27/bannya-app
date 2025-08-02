@@ -1,51 +1,60 @@
 <template>
-  <div class="bg-gray-100 py-16">
-    <div class="container mx-auto px-6">
-      <h2 class="text-4xl font-extrabold text-center text-gray-800 mb-12">บทความน่ารู้</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-        <div v-for="article in articles" :key="article.id" class="bg-white rounded-xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300 ease-in-out">
-          <img :src="article.imageUrl" :alt="article.title" class="w-full h-56 object-cover object-center">
-          <div class="p-7">
-            <h3 class="text-2xl font-semibold text-gray-900 mb-3">{{ article.title }}</h3>
-            <p class="text-gray-700 leading-relaxed mb-5 text-lg">{{ article.excerpt }}</p>
-            <a href="#" class="inline-flex items-center text-green-600 hover:text-green-700 font-medium transition duration-300 ease-in-out text-lg">
-              อ่านต่อ
-              <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-            </a>
-          </div>
-        </div>
+  <div class="bg-gray-50 py-24 sm:py-32">
+    <div class="mx-auto max-w-7xl px-6 lg:px-8">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">{{ articlesData.title }}</h2>
+        <p class="mt-2 text-lg leading-8 text-gray-600">
+          {{ articlesData.description }}
+        </p>
       </div>
-      <div class="text-center mt-12">
-        <a href="#" class="inline-flex items-center px-8 py-3 border border-transparent text-lg font-medium rounded-full text-white bg-green-600 hover:bg-green-700 transition duration-300 ease-in-out shadow-lg">
-          แสดงทั้งหมด
-          <svg class="ml-2 w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-        </a>
+      <div
+        class="mx-auto mt-16 grid max-w-2xl auto-rows-fr grid-cols-1 gap-8 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
+        <article v-for="article in articlesData.items" :key="article.id"
+          class="relative isolate flex flex-col justify-end overflow-hidden rounded-2xl bg-gray-900 px-8 pb-8 pt-80 sm:pt-48 lg:pt-80">
+          <img :src="article.image" :alt="article.title" class="absolute inset-0 -z-10 h-full w-full object-cover">
+          <div class="absolute inset-0 -z-10 bg-gradient-to-t from-gray-900 via-gray-900/40"></div>
+          <div class="absolute inset-0 -z-10 rounded-2xl ring-1 ring-inset ring-gray-900/10"></div>
+
+          <div class="flex flex-wrap items-center gap-y-1 overflow-hidden text-sm leading-6 text-gray-300">
+            <time :datetime="article.date" class="mr-8">{{ article.date }}</time>
+            <div class="-ml-4 flex items-center gap-x-4">
+              <svg viewBox="0 0 2 2" class="-ml-0.5 h-0.5 w-0.5 flex-none fill-white/50">
+                <circle cx="1" cy="1" r="1" />
+              </svg>
+              <div class="flex gap-x-2.5">
+                <img src="https://placehold.co/40x40/ffffff/000000?text=Dr." alt=""
+                  class="h-6 w-6 flex-none rounded-full bg-white/10">
+                {{ articlesData.authorPrefix }} {{ article.author }}
+              </div>
+            </div>
+          </div>
+          <h3 class="mt-3 text-lg font-semibold leading-6 text-white">
+            <a href="#">
+              <span class="absolute inset-0"></span>
+              {{ article.title }}
+            </a>
+          </h3>
+        </article>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref } from 'vue';
+<script setup lang="ts">
+interface ArticleItem {
+  id: number;
+  title: string;
+  date: string;
+  author: string;
+  image: string;
+}
 
-const articles = ref([
-  {
-    id: 1,
-    title: 'เรื่องน่ารู้เกี่ยวกับยาแก้แพ้',
-    excerpt: 'ยาแก้แพ้มีหลายชนิด แต่ละชนิดมีวิธีใช้อย่างไร... ',
-    imageUrl: '/images/landing/article1.jpg'
-  },
-  {
-    id: 2,
-    title: 'ดูแลตัวเองอย่างไรเมื่อเป็นภูมิแพ้',
-    excerpt: 'เคล็ดลับการดูแลตัวเองง่ายๆ เมื่อต้องเผชิญกับอาการภูมิแพ้...',
-    imageUrl: '/images/landing/article2.jpg'
-  },
-  {
-    id: 3,
-    title: 'สมุนไพรไทยช่วยบรรเทาอาการแพ้',
-    excerpt: 'พบกับสมุนไพรไทยที่หาได้ง่ายและมีสรรพคุณช่วยบรรเทาอาการ...',
-    imageUrl: '/images/landing/article3.jpg'
-  }
-]);
+interface ArticlesData {
+  title: string;
+  description: string;
+  authorPrefix: string;
+  items: ArticleItem[];
+}
+
+defineProps<{ articlesData: ArticlesData }>();
 </script>
