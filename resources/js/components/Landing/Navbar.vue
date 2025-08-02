@@ -48,57 +48,18 @@
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end"
                 class="w-64 mt-2 bg-white rounded-lg shadow-xl ring-1 ring-gray-200 focus:outline-none p-2">
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="/dashboard" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <LayoutGrid class="mr-2 h-5 w-5" /><span>จัดการระบบ</span></Link>
-                </DropdownMenuItem>
+                <template v-for="(item, index) in userMenuItems" :key="index">
+                  <DropdownMenuSeparator v-if="item.isSeparator" class="my-1" />
+                  <DropdownMenuItem v-else as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out hover:cursor-pointer">
+                    <Link :href="item.href" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
+                      <component :is="icons[item.icon]" class="mr-2 h-5 w-5" />
+                      <span>{{ item.label }}</span>
+                    </Link>
+                  </DropdownMenuItem>
+                </template>
                 <DropdownMenuSeparator class="my-1" />
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <User class="mr-2 h-5 w-5" /><span>บัญชีของฉัน</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Star class="mr-2 h-5 w-5" /><span>แต้มของฉัน</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <ShoppingCart class="mr-2 h-5 w-5" /><span>คำสั่งซื้อของฉัน</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Award class="mr-2 h-5 w-5" /><span>แต้ม</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <BarChart class="mr-2 h-5 w-5" /><span>สถิติ</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Share2 class="mr-2 h-5 w-5" /><span>แนะนำเพื่อน</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Tag class="mr-2 h-5 w-5" /><span>รหัสส่วนลดของฉัน</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <MessageSquare class="mr-2 h-5 w-5" /><span>ความคิดเห็นของฉัน</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Heart class="mr-2 h-5 w-5" /><span>สินค้าที่สนใจ</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Eye class="mr-2 h-5 w-5" /><span>สินค้าเปิดดู</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem as-child class="hover:bg-green-50 rounded-md transition duration-150 ease-in-out">
-                  <Link href="#" class="flex items-center w-full px-4 py-2 text-gray-700 hover:text-green-800">
-                  <Gift class="mr-2 h-5 w-5" /><span>กิจกรรมรางวัล</span></Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator class="my-1" />
-                <DropdownMenuItem as-child class="hover:bg-red-50 rounded-md transition duration-150 ease-in-out">
+                <DropdownMenuItem as-child
+                  class="hover:bg-red-50 rounded-md transition duration-150 ease-in-out hover:cursor-pointer">
                   <Link :href="route('logout')" method="post" as="button"
                     class="flex items-center w-full px-4 py-2 text-red-600 hover:text-red-800">
                   <LogOut class="mr-2 h-5 w-5" /><span>ออกจากระบบ</span></Link>
@@ -149,46 +110,14 @@
           </Link>
         </template>
         <template v-else>
-          <Link href="/dashboard"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          จัดการระบบ</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          บัญชีของฉัน</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          แต้มของฉัน</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          คำสั่งซื้อของฉัน</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          แต้ม</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          สถิติ</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          แนะนำเพื่อน</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          รหัสส่วนลดของฉัน</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          ความคิดเห็นของฉัน</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          สินค้าที่สนใจ</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          สินค้าเปิดดู</Link>
-          <Link href="#"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
-          กิจกรรมรางวัล</Link>
-          <hr class="my-2 border-gray-200">
-          <Link :href="route('logout')" method="post" as="button"
-            class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium text-left">
-          ออกจากระบบ</Link>
+            <Link v-for="(item, index) in mobileUserMenuItems" :key="index" :href="item.href"
+                class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium">
+                {{ item.label }}
+            </Link>
+            <hr class="my-2 border-gray-200">
+            <Link :href="route('logout')" method="post" as="button"
+                class="text-gray-600 hover:bg-green-100 hover:text-green-700 block px-3 py-2 rounded-md text-base font-medium text-left">
+            ออกจากระบบ</Link>
         </template>
       </div>
     </div>
@@ -196,7 +125,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
+import { ref, onMounted, onUnmounted, computed, shallowRef } from 'vue';
 import { Link } from '@inertiajs/vue3';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger, DropdownMenuSeparator } from '@/components/ui/dropdown-menu';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
@@ -217,4 +146,40 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
 });
+
+const icons = shallowRef({
+  LayoutGrid, User, Star, ShoppingCart, Award, BarChart, Share2, Tag, MessageSquare, Heart, Eye, Gift, LogOut
+});
+
+interface MenuItem {
+    href: string;
+    label: string;
+    icon: keyof typeof icons.value;
+    isSeparator?: false;
+}
+
+interface MenuSeparator {
+    isSeparator: true;
+}
+
+type UserMenuItem = MenuItem | MenuSeparator;
+
+
+const userMenuItems = ref<UserMenuItem[]>([
+  { href: '/dashboard', label: 'จัดการระบบ', icon: 'LayoutGrid' },
+  { isSeparator: true },
+  { href: '#', label: 'บัญชีของฉัน', icon: 'User' },
+  { href: '#', label: 'แต้มของฉัน', icon: 'Star' },
+  { href: '#', label: 'คำสั่งซื้อของฉัน', icon: 'ShoppingCart' },
+  { href: '#', label: 'แต้ม', icon: 'Award' },
+  { href: '#', label: 'สถิติ', icon: 'BarChart' },
+  { href: '#', label: 'แนะนำเพื่อน', icon: 'Share2' },
+  { href: '#', label: 'รหัสส่วนลดของฉัน', icon: 'Tag' },
+  { href: '#', label: 'ความคิดเห็นของฉัน', icon: 'MessageSquare' },
+  { href: '#', label: 'สินค้าที่สนใจ', icon: 'Heart' },
+  { href: '#', label: 'สินค้าเปิดดู', icon: 'Eye' },
+  { href: '#', label: 'กิจกรรมรางวัล', icon: 'Gift' },
+]);
+
+const mobileUserMenuItems = computed(() => userMenuItems.value.filter((item): item is MenuItem => !item.isSeparator));
 </script>
